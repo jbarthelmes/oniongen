@@ -27,4 +27,4 @@ Donate
 ------
 
 I accept donations via Bitcoin: `1DQkWHtzVqwt6v3C1JEr5i34ypkNGBM9tC`.
-Everything is appreciated!
+Everything is appreciated! :heart:
