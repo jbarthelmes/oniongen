@@ -1,0 +1,7 @@
+Compile with any compiler, link with libcrypto.
+Example:
+
+$ gcc oniongen.c -o oniongen -lcrypto
+$ ./oniongen onion
+
+Will find an .onion URL for you that begins with "onion".
