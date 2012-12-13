@@ -22,3 +22,9 @@ This will find an .onion URL for you that begins with "onion".
 ```bash
 $ ./oniongen onion
 ```
+
+Donate
+------
+
+I accept donations via Bitcoin: `1DQkWHtzVqwt6v3C1JEr5i34ypkNGBM9tC`.
+Everything is appreciated!
