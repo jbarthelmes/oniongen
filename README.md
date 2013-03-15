@@ -3,6 +3,8 @@ oniongen
 
 Generate vanity .onion URLs (i.e. they match a pattern you specify) with your CPU.
 
+This project is currently looking for a new maintainer. Apply via an issue.
+
 Compiling
 ---------
 
@@ -27,4 +29,3 @@ Donate
 ------
 
 I accept donations via Bitcoin: `1DQkWHtzVqwt6v3C1JEr5i34ypkNGBM9tC`.
-Everything is appreciated! :heart:
