@@ -29,8 +29,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
    the TOR project (https://www.torproject.org/). The license of the TOR project
    can be found in the TOR-LICENSE file. */
 
-/* This source code is intended to be distributed as a single file. */
-
 #include <assert.h>
 #include <stdbool.h>
 #include <stdint.h>
