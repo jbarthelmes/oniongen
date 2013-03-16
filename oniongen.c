@@ -56,8 +56,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #define DIGEST_LEN 20
 
-/* Preemptive declarations of all functions in this file, as it is intended to  
-   be distributed as just one file (i.e. we can't use .h). */
 int main(int argc, const char *argv[]);
 void generate_service(const char *pattern);
 bool pattern_is_not_too_long(const char *pattern);
