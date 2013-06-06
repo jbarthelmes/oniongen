@@ -23,15 +23,15 @@ $ ./oniongen pattern
 
 Will search for an .onion URL that begins with `pattern`.
 
-### Example
-
-This will find an .onion URL for you that begins with "onion".
+Example:
   
 ```bash
 $ ./oniongen onion
 ```
 
-Donate
-------
+This will find an .onion URL for you that begins with "onion".
 
-I accept donations via Bitcoin: `1DQkWHtzVqwt6v3C1JEr5i34ypkNGBM9tC`.
+Donations
+---------
+
+I accept donations via Bitcoin (`1DQkWHtzVqwt6v3C1JEr5i34ypkNGBM9tC`) and GitTip (https://www.gittip.com/jbarthelmes/).
