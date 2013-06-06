@@ -3,8 +3,6 @@ oniongen
 
 Generate vanity .onion URLs (i.e. they match a pattern you specify) with your CPU.
 
-This project is currently looking for a new maintainer. Apply via an issue.
-
 Compiling
 ---------
 
@@ -18,6 +16,14 @@ $ gcc oniongen.c -o oniongen -lcrypto
   
 Usage
 -----
+
+```bash
+$ ./oniongen pattern
+```
+
+Will search for an .onion URL that begins with `pattern`.
+
+### Example
 
 This will find an .onion URL for you that begins with "onion".
   
