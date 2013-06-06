@@ -50,7 +50,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define KEYSIZE                    1024
 #define PUBLIC_EXPONENT            3
 
-/* The length of the x part in "x.onion". */
+/* The length of the "x" part in "x.onion". */
 #define REND_SERVICE_ID_LEN_BASE32 16
 #define REND_SERVICE_ID_LEN 10
 
@@ -62,6 +62,7 @@ bool pattern_is_not_too_long(const char *pattern);
 bool pattern_has_valid_chars(const char *pattern);
 void export_private_key(RSA *private_key, const char *pattern);
 bool pattern_matches_service_id(const char *pattern, const char *service_id);
+
 /* These functions are adapted from the TOR project. */
 bool rend_get_service_id(RSA *pk, char *out);
 bool crypto_pk_get_digest(RSA *pk, char *digest_out);
@@ -84,13 +85,15 @@ int main(int argc, const char *argv[]) {
 void generate_service(const char *pattern) {
   /* A pointer to an OpenSSL RSA key structure (see below). */
   RSA *private_key;
-  /* A buffer for the generated service ID (see below). */
-  char service_id[REND_SERVICE_ID_LEN_BASE32+1];
+  /* A buffer for the generated service ID (see below). Will include
+     terminating '\0' character. */
+  char service_id[REND_SERVICE_ID_LEN_BASE32 + 1];
 
   /* Validate the pattern. */
   assert(pattern_is_not_too_long(pattern));
   assert(pattern_has_valid_chars(pattern));
 
+  /* Perform a non-deterministic brute-force search for the key. */
   do {
     /* Generate a random key with the constants from above. */
     private_key = RSA_generate_key(KEYSIZE, PUBLIC_EXPONENT, NULL, NULL);
@@ -111,21 +114,14 @@ bool pattern_is_not_too_long(const char *pattern) {
   return strlen(pattern) <= REND_SERVICE_ID_LEN_BASE32;
 }
 
-/* Check whether the characters of `pattern' */
+/* Check whether the characters of `pattern' are all valid. */
 bool pattern_has_valid_chars(const char *pattern) {
-  /* Just a counter variable for the `for' loop below. */
   uint8_t i;
-  /* See below. */
-  size_t pattern_length;
 
   assert(pattern_is_not_too_long(pattern));
 
-  /* `strlen(pattern)' is not being computed in the head of the `for' construct
-      because I don't know if it will be recomputed (which would give the loop
-      an O(n^2) runtime). */
-  pattern_length = strlen(pattern);
   /* "For each character in `pattern'..." */
-  for (i = 0; i < pattern_length; i++) {
+  for (i = 0; i < strlen(pattern); i++) {
     /* "If `pattern[i]' is not an element of `BASE32_CHARS'..." */
     if (!(islower(pattern[i]) || (pattern[i] >= 2 && pattern[i] <= 7))) {
       return false;
@@ -142,13 +138,13 @@ void export_private_key(RSA *private_key, const char *pattern) {
   FILE *pem_file;
   /* The path for `pem_file' relative to the working directory. */
   char *file_relpath;
-  /* If the `/' irritates you, look below. */
+
   const char *file_path = "/private_key";
 
   /* Create a directory with the name from pattern. */
   assert(mkdir(pattern, S_IRWXU) == 0);
 
-  /* 13 == strlen(file_relpath) + 1 for the '\0' character. */
+  /* 13 == strlen(file_path) + 1 for the '\0' character. */
   file_relpath = malloc(strlen(pattern)+13);
   assert(file_relpath != NULL);
 
@@ -207,7 +203,7 @@ void base32_encode(char *dest, size_t destlen, const char *src, size_t srclen) {
   unsigned int i, v, u;
   size_t nbits = srclen * 8, bit;
 
-  char *BASE32_CHARS = "abcdefghijklmnopqrstuvwxyz234567";
+  const char *BASE32_CHARS = "abcdefghijklmnopqrstuvwxyz234567";
 
   assert((nbits%5) == 0); /* We need an even multiple of 5 bits. */
   assert((nbits/5)+1 <= destlen); /* We need enough space. */
