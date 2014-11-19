@@ -30,10 +30,3 @@ $ ./oniongen onion
 ```
 
 This will find an .onion URL for you that begins with "onion".
-
-Donations
----------
-
-I accept donations via Bitcoin (`1ArmokhWt4Pixhq1yoyst1yg4G4ZsaUMjW`) and GitTip (https://www.gittip.com/jbarthelmes/).
-
-Feel free to fork and improve this project.
